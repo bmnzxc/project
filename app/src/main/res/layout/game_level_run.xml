@@ -4,24 +4,20 @@
     android:id="@+id/game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/background" />
+    android:orientation="vertical"
+    android:background="@color/activity_backgroung_color">
 
 
-        <EditText
+
+
+    <EditText
             android:id="@+id/ans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="20"
 
-            android:inputType="textCapWords"
+            android:inputType="text"
             android:maxLength="20"
             android:background="@drawable/edit_text_style_stroke"
             android:paddingLeft="15dp"
@@ -29,28 +25,48 @@
             android:textColorHint="@color/white"
             android:hint="Введите слово"
             android:textColor="@color/white100"
-            android:layout_below="@id/qest"
-            android:layout_marginTop="50dp"/>
+            android:layout_below="@id/timeOut"
+            android:layout_marginTop="330dp"/>
 
-    <TextView
-        android:id="@+id/qest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="30dp"
-        android:textColor="@color/red"
-        android:layout_marginTop="150dp"
-        android:text=""
-        android:layout_below="@id/timeOut"/>
 
     <TextView
         android:id="@+id/timeOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textSize="40dp"
-        android:text="" />
+        android:textColor="@color/white30" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/timeOut"
+        android:orientation="horizontal"
+        android:layout_marginBottom="400dp">
+
+        <TextView
+            android:id="@+id/qest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="sdfsdfsdfsdfer"
+            android:textColor="@color/red"
+            android:textSize="27dp" />
+
+        <TextView
+            android:id="@+id/qest_bonus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="sdfsdfsdfsdfer"
+            android:textColor="@color/red"
+            android:textSize="27dp" />
+    </LinearLayout>
+
 
 
 </RelativeLayout>

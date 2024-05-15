@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/activity_backgroung_color">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background" />
-
-    <LinearLayout
-        android:id="@+id/startLayout"
+    <Button
+        android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="180dp"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/LevelNum"
+        android:layout_marginBottom="220dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_stroke_black95_press_white"
 
-        <Button
-            android:id="@+id/buttonStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/startBT"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:paddingBottom="4dp"
-            android:background="@drawable/button_stroke_black95_press_white"
-            android:textColor="@color/black95"
-            android:textSize="28sp"/>
-    </LinearLayout>
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:text="@string/startBT"
+        android:textColor="@color/black95"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/LevelNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
-        android:paddingRight="25dp"
-        android:textColor="@color/black95"
+        android:layout_marginBottom="100dp"
+        android:layout_weight="1"
 
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:text="@string/levelN" />
+        android:fontFamily="@font/roboto_mono_light"
+        android:gravity="center"
+        android:paddingRight="10dp"
 
-    <TextView
-        android:id="@+id/textView3"
+
+        android:textColor="#FDFEFE"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:paddingLeft="130dp"
-        android:layout_alignBaseline="@id/LevelNum"
-        android:textSize="28sp"
-        android:layout_alignEnd="@id/LevelNum"
-         />
-
-
-</RelativeLayout>
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="33dp"
+        android:text="Статистика"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black95"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStart"
+        android:background="@drawable/button_stroke_black95_press_white"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
