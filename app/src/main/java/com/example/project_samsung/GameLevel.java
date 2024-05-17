@@ -23,7 +23,7 @@ public class GameLevel extends AppCompatActivity {
     public static int score, rightW, wrongW;
     private Handler handlerBonus = new Handler(), handler = new Handler();
     private Runnable changeWordRunnable, changeBonusWordRunnable;
-    private final int COUNT_TIMER_SEC = 20, TIME_FOR_BONUS_W_SEC = 7, minValue = 0, maxValue = words.length;
+    private final int COUNT_TIMER_SEC = 20, TIME_FOR_BONUS_W_SEC = 5, minValue = 0, maxValue = words.length;
     int decrease = 0;
     public static double combo = 1;
 
@@ -47,7 +47,6 @@ public class GameLevel extends AppCompatActivity {
         combo = 1;
         rightW = 0;
         wrongW = 0;
-        // Initialize the display with the first word
         try {
             Thread.sleep(500);
             displayTextView.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
@@ -56,7 +55,6 @@ public class GameLevel extends AppCompatActivity {
             animatiBonus();
         }catch (Exception e){onBackPressed();}
 
-        // Setup onClick listener for the submit button
         inputEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -66,7 +64,6 @@ public class GameLevel extends AppCompatActivity {
                 return true;
             }
         });
-        // Initialize and start the timer
         startTimer();
         startTimerBonus();
     }
@@ -131,8 +128,8 @@ public class GameLevel extends AppCompatActivity {
 
             // Бонусное слово
             if (userInput.trim().toLowerCase().equals(displayedBonusW.trim().toLowerCase())) {
-                if (decrease < 2000){
-                    decrease += 500;
+                if (decrease < 1500){
+                    decrease += 300;
                 }
                 combo += 0.2;
                 rightW++;

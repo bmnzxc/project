@@ -38,45 +38,33 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private long backPressedTime;
 
-
     DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHelper = new DBHelper(this);
-
-        textView = findViewById(R.id.LevelNum);
-        buttonStart = findViewById(R.id.buttonStart);
-        btnStats =findViewById(R.id.button_stats);
 
 
-        textView.setText("Последний результат: " + String.valueOf(dbHelper.getLastNumber()));
-
-        buttonStart.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                ani(buttonStart);
-                try {
-                    Intent intent = new Intent(MainActivity.this, GameLevel.class);
-                    startActivity(intent);
-                }catch (Exception e){onClick(v);}
-            }
-        });
-        btnStats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ani(btnStats);
-                Intent intent = new Intent(MainActivity.this, Stats.class);
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                if (item.getItemId() == R.id.navigation_home){
+                    selectedFragment = new HomeFragment();
+                } else if (item.getItemId() == R.id.navigation_statistics) {
+                    selectedFragment = new StatisticsFragment();
+                } else if (item.getItemId() == R.id.navigation_settings) {
+                    selectedFragment = new SettingsFragment();
+                }
+                if (selectedFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                }
+                return true;
             }
         });
 
-       // BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
-       // AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.storyFragment, R.id.settingsFragment).build();
-       // NavController navController = Navigation.findNavController(this,R.id.fragmentContainerView);
-      //  NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-       // NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 
     @Override
@@ -88,10 +76,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(),"Нажмите ещё раз, чтобы выйти", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
-    }
-    public void ani(Button plate){
-        Animation animation = null;
-        animation = AnimationUtils.loadAnimation(plate.getContext(), R.anim.on_press_scale_anim);
-        plate.startAnimation(animation);
     }
 }

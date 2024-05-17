@@ -1,62 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/activity_backgroung_color">
+    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/LevelNum"
-        android:layout_marginBottom="220dp"
-        android:layout_weight="1"
-        android:background="@drawable/button_stroke_black95_press_white"
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
 
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="@string/startBT"
-        android:textColor="@color/black95"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"
+        android:background="#212F3C"
+        app:itemTextColor="@color/white30timer" />
 
-
-    <TextView
-        android:id="@+id/LevelNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-        android:layout_weight="1"
-
-        android:fontFamily="@font/roboto_mono_light"
-        android:gravity="center"
-        android:paddingRight="10dp"
-
-
-        android:textColor="#FDFEFE"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button_stats"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="33dp"
-        android:text="Статистика"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/black95"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStart"
-        android:background="@drawable/button_stroke_black95_press_white"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
