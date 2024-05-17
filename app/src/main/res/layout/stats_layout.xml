@@ -9,17 +9,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15sp"
+
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/mid_layoput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="5sp"
             android:layout_weight="1"
-            android:orientation="vertical">
+
+            android:background="@drawable/plates_background_style_stats"
+            android:backgroundTint="#F1C40F"
+            android:orientation="vertical"
+            android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/mid_res"
@@ -27,23 +38,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="35sp"
-                android:textColor="@color/white30"/>
+                android:textColor="@color/plates_stats_color"
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/under_mid_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="@color/white30"/>
+                android:textColor="@color/plates_stats_color" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/best_layoput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:background="@drawable/plates_background_style_stats"
+            android:backgroundTint="#F1C40F"
+            android:orientation="vertical"
+            android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/best_result"
@@ -51,24 +67,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="35sp"
-                android:textColor="@color/white30"/>
+                android:textColor="@color/plates_stats_color"
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/under_best_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="@color/white30"/>
+                android:textColor="@color/plates_stats_color" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/count_layoput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_weight="1"
+            android:background="@drawable/plates_background_style_stats"
+            android:backgroundTint="#F1C40F"
             android:orientation="vertical"
-            android:textColor="@color/white30">
+            android:paddingBottom="6dp"
+            android:textColor="@color/plates_stats_color">
 
             <TextView
                 android:id="@+id/count_tests"
@@ -76,17 +97,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="35sp"
-                android:textColor="@color/white30"/>
+                android:textColor="@color/plates_stats_color"
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/under_count_tests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="TextView"
-                android:textColor="@color/white30"
-                />
+                android:textColor="@color/plates_stats_color" />
         </LinearLayout>
 
     </LinearLayout>

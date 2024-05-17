@@ -10,6 +10,8 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,6 +48,7 @@ public class ResultWindow extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    ani(button);
                     countDownTimer.cancel();
                     Intent intent = new Intent(ResultWindow.this, MainActivity.class);
                     startActivity(intent);
@@ -75,5 +78,10 @@ public class ResultWindow extends AppCompatActivity {
             }catch (Exception e){onFinish();}
         }
     }.start();
+    public void ani(Button plate){
+        Animation animation = null;
+        animation = AnimationUtils.loadAnimation(plate.getContext(), R.anim.on_press_scale_anim);
+        plate.startAnimation(animation);
+    }
 
 }

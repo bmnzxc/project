@@ -17,27 +17,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameLevel extends AppCompatActivity {
 
-    private TextView timerTextView;
-    private TextView displayTextView, displayBonusWord;
+    private TextView timerTextView, displayTextView, displayBonusWord, comboView;
     private EditText inputEditText;
     private String[] words = {"apple", "banana", "orange", "grape", "melon"};
-    private final int minValue = 0;
-    private final int maxValue = words.length;
-    public static int score = 0;
-    private Handler handler = new Handler();
-    private Handler handlerBonus = new Handler();
+    public static int score, rightW, wrongW;
+    private Handler handlerBonus = new Handler(), handler = new Handler();
     private Runnable changeWordRunnable, changeBonusWordRunnable;
-    final int COUNT_TIMER_SEC = 15;
+    private final int COUNT_TIMER_SEC = 20, TIME_FOR_BONUS_W_SEC = 7, minValue = 0, maxValue = words.length;
+    int decrease = 0;
+    public static double combo = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_level_run);
-
         displayBonusWord = findViewById(R.id.qest_bonus);
         timerTextView = findViewById(R.id.timeOut);
         displayTextView = findViewById(R.id.qest);
         inputEditText = findViewById(R.id.ans);
+        comboView = findViewById(R.id.comboView);
 
         registerForContextMenu(displayTextView);
         registerForContextMenu(displayBonusWord);
@@ -45,13 +44,17 @@ public class GameLevel extends AppCompatActivity {
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         score = 0;
-
+        combo = 1;
+        rightW = 0;
+        wrongW = 0;
         // Initialize the display with the first word
-        animati();
-        animatiBonus();
-
-        displayTextView.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
-        displayBonusWord.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
+        try {
+            Thread.sleep(500);
+            displayTextView.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+            displayBonusWord.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+            animati();
+            animatiBonus();
+        }catch (Exception e){onBackPressed();}
 
         // Setup onClick listener for the submit button
         inputEditText.setOnKeyListener(new View.OnKeyListener() {
@@ -63,7 +66,6 @@ public class GameLevel extends AppCompatActivity {
                 return true;
             }
         });
-
         // Initialize and start the timer
         startTimer();
         startTimerBonus();
@@ -78,6 +80,7 @@ public class GameLevel extends AppCompatActivity {
     public void animatiBonus(){
         Animation animation = null;
         animation = AnimationUtils.loadAnimation(displayBonusWord.getContext(), R.anim.move_down_bonus);
+        animation.setDuration((TIME_FOR_BONUS_W_SEC*1000) - decrease);
         displayBonusWord.startAnimation(animation);
     }
 
@@ -104,20 +107,18 @@ public class GameLevel extends AppCompatActivity {
             }
         };
 
-        handlerBonus.postDelayed(changeBonusWordRunnable,4000);
+        handlerBonus.postDelayed(changeBonusWordRunnable, TIME_FOR_BONUS_W_SEC *1000 - decrease);
     }
 
 
     private void changeDisplayedWord() {
-        animati();
         displayTextView.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
-       // score--; // Decrement score when word changes automatically
+        animati();
         resetTimer();
     }
     private void changeDisplayedBonusWord() {
-        animatiBonus();
         displayBonusWord.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
-       // score--; // Decrement score when word changes automatically
+        animatiBonus();
         resetTimerBonus();
     }
 
@@ -127,33 +128,43 @@ public class GameLevel extends AppCompatActivity {
             String displayedWord = displayTextView.getText().toString().trim().toLowerCase();
             String displayedBonusW = displayBonusWord.getText().toString().trim().toLowerCase();
 
-            if (userInput.trim().equals(displayedBonusW.toLowerCase())){
-                animatiBonus();
-                displayBonusWord.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
-                score = score + 4; // Increment score when input matches displayed word
-                inputEditText.setText(""); // Clear input field
-                displayTextView.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
-                inputEditText.setText("");
-                animati();
-                resetTimerBonus();
-            }
 
-            else if (userInput.trim().equals(displayedWord.toLowerCase())) {
+            // Бонусное слово
+            if (userInput.trim().toLowerCase().equals(displayedBonusW.trim().toLowerCase())) {
+                if (decrease < 2000){
+                    decrease += 500;
+                }
+                combo += 0.2;
+                rightW++;
+                ani(comboView);
+                comboView.setText(String.format("%.1f",combo));
+                score = score + 3; // Increment score when input matches displayed word
+                inputEditText.setText(""); // Clear input field
+                changeDisplayedBonusWord();
+                changeDisplayedWord();
+            }
+            // обычное слово
+            else if (userInput.trim().toLowerCase().equals(displayedWord.trim().toLowerCase())) {
+                combo += 0.2;
+                rightW++;
+                decrease = 0;
+                ani(comboView);
                 animati();
-                displayTextView.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+                comboView.setText(String.format("%.1f",combo));
                 score++; // Increment score when input matches displayed word
                 inputEditText.setText(""); // Clear input field
-                resetTimer();
+                changeDisplayedWord();
             }
             else {
-                animati();
-                animatiBonus();
-                displayTextView.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
-                displayBonusWord.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+                combo = 1.0;
+                decrease = 0;
+                wrongW--;
+                ani(comboView);
+                comboView.setText(String.format("%.1f",combo));
                 score--;
                 inputEditText.setText("");
-                resetTimer();
-                resetTimerBonus();
+                changeDisplayedWord();
+                changeDisplayedBonusWord();
             }
         }catch (Exception e){checkInput();}
     }
@@ -186,6 +197,9 @@ public class GameLevel extends AppCompatActivity {
         @Override
         public void onFinish() {
             try {
+                if (wrongW<0)
+                    wrongW = 0;
+                score = score * (int)combo;
                 handler.removeCallbacks(changeWordRunnable);
                 handlerBonus.removeCallbacks(changeBonusWordRunnable);
                 Intent intent = new Intent(GameLevel.this, ResultWindow.class);
@@ -194,4 +208,9 @@ public class GameLevel extends AppCompatActivity {
         }
     }.start();
 
+    public void ani(TextView text){
+        Animation animation = null;
+        animation = AnimationUtils.loadAnimation(text.getContext(), R.anim.combo_count_anim);
+        text.startAnimation(animation);
+    }
 }

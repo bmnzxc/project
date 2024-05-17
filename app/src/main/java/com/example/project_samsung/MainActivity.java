@@ -21,8 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,32 +53,20 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setText("Последний результат: " + String.valueOf(dbHelper.getLastNumber()));
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent intent = new Intent(MainActivity.this, GameLevel.class);
-                    startActivity(intent);
-                }catch (Exception e){run();}
-            }
-        };
-        Thread thread = new Thread(runnable);
-
-        try {
-            Thread.sleep(1000);
-        }catch (Exception e){}
-
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ani(buttonStart);
                 try {
-                    thread.run();
-                } catch (Exception e) {}
+                    Intent intent = new Intent(MainActivity.this, GameLevel.class);
+                    startActivity(intent);
+                }catch (Exception e){onClick(v);}
             }
         });
         btnStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ani(btnStats);
                 Intent intent = new Intent(MainActivity.this, Stats.class);
                 startActivity(intent);
             }
@@ -97,5 +88,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(),"Нажмите ещё раз, чтобы выйти", Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+    public void ani(Button plate){
+        Animation animation = null;
+        animation = AnimationUtils.loadAnimation(plate.getContext(), R.anim.on_press_scale_anim);
+        plate.startAnimation(animation);
     }
 }
