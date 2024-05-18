@@ -19,13 +19,15 @@ public class GameLevel extends AppCompatActivity {
 
     private TextView timerTextView, displayTextView, displayBonusWord, comboView;
     private EditText inputEditText;
-    private String[] words = {"apple", "banana", "orange", "grape", "melon"};
+    private String[] words_short = {"Цитат","Центнер","Ценност","Целлофан","Цикло","Цилиндр","Цыга","Цыкать","Цыпки","Цыплёно","Цыпочки","Чемодан","Четвер","Четыре","Чувств","Чёрный","Челове","Чернила","Чемпион","Чемпион","Чтобы","Часовн","Шофёр","Шоссе","Шокола","Штукатур","Шабло","Шарада","Шасс","Шеренга","Шорох","Щавел","Щедроты","Щеколд","Щупальца","Эвкалип","Эмблема","Эпидеми","Элемент","Эпило","Эволюция","Эвфемиз","Эгида","Экзаме","Элегия","Эликси","Эмоция","Юны","Юннат","Яблок","Ягода","Язы","Яблоня","Январ","Янтарный","Якоб","Яство","Ятаган","Альбом","Арбуз","Апрель","Автобус","Аптека","Аппарат","Аппетит","Антоним","Апельсин","Арена","Алюминий","Арматура","Автор","Акваланг","Акварель","Аквариум","Академия","Акация","Ансамбль","Апофеоз","Аромат","Аттестат","Абордаж","Абориген","Авангард","Авантюра","Адъютант","Алгоритм","Асфальт","Абажур","Автограф","Адвокат","Адъюнкт","Ажиотаж","Айсберг","Аккорд","Альманах","Амплуа","Аналогия","Анафора","Анекдот","Анналы","Аномалия","Антенна","Антитеза","Апогей","Апостол","Архаизм","Асессор","Атолл","Барабан","Беседа","Билет","Багаж","Береза","Быстро","Берег","Болото","Ботинки","Балкон","Барьер","Беречь","Бинокль","Брошюра","Багряный","Бассейн","Бахрома","Бетон","Богатырь","Бордовый","Братство","Бакалавр","Балласт","Баталия","Блеснуть","Блистать","Бравада","Брасс","Будущее","Базар","Балл","Баллада","Баллон","Барельеф","Барокко","Бархат","Батальон","Батискаф","Белорус","Бельэтаж","Бечева","Биатлон","Бидон","Биллион","Бильярд","Блокпост","Брильянт","Букинист","Буланый","Бумеранг","Весело","Вокзал","Воробей","Ворона","Впереди","Вчера","Вагон","Варежки","Вдруг","Ветер","Воротник","Винегрет","Вместе","Вокруг","Восемь","Восток","Вторник","Везде","Воин","Вперед","Вверху","Вдвоем","Великий","Веять","Влево","Внизу","Ворота","Вперёд","Вправо","Вскоре","Втроем","Въезжать","Вьюга","Ветеран"};
+    private String[] words_long_bonus = {"Пребывать","Превратить","Презирать","Прекратить","Преобразовать","Преодолеть","Препятствие","Претворить","Привыкать","Пригласить","Пригодиться","Приготовить","Приказать","Приключение","Прилежный","Примерять","Примирять","Приобрести","Присмотреться","Приспособиться","Присутствовать","Притворить","Профессионализм","Профессиональный","Почтальон","Предварительный","Претендовать","Претензия","Патриотизм","Поликлиника","Постамент","Представление","Предшественник","Президиум","Прелестный","Привилегия","Приоритет","Пропорция","Просветительство","Просвещение","Пьедестал","Перспектива","Подлинник","Палеограф","Пантомима","Папоротник","Патронташ","Периферия","Перпендикуляр","Пессимист","Полицмейстер","Презентация","Пропаганда","Расстояние","Расписание","Расстроить","Рассчитать","Рассчитывать","Расчетливый","Республика","Резиденция","Разнообразие","Рассеченный","Резолюция","Рекомендация","Репетиция","Реставрация","Российский","Реактивный","Репродукция","Синтаксис","Сказуемое","Словосочетание","Соревноваться","Состязаться","Спартакиада","Спортсмен","Справедливый","Стремиться","Сельдерей","Состязание","Священный","Старательно","Современник","Сожженный","Созданный","Соловьиный","Соотечественник","Соразмерность","Стипендия","Стратегия","Совершеннейший","Совершенный","Санаторий","Священник","Семантика","Симметрия","Телевизор","Телепередача","Троллейбус","Тренироваться","Телеграмма","Типография","Торопиться","Территория","Тысячелетие","Темперамент","Учительница","Участвовать","Учреждение","Утрамбовать","Университет","Фиолетовый","Фонетический","Фотоаппарат","Физиономия","Фейерверк","Фестиваль","Фельдъегерь","Хозяйство","Хризантема","Хронология","Целлюлоза","Циферблат","Чувствовать","Четыреста","Шестнадцать","Штукатурить","Шевелиться","Шествовать","Шампиньон","Шпаргалка","Экскурсия","Экскаватор","Электричество","Электровоз","Электростанция"};
     public static int score, rightW, wrongW;
+    public static double maxCombo;
     private Handler handlerBonus = new Handler(), handler = new Handler();
     private Runnable changeWordRunnable, changeBonusWordRunnable;
-    private final int COUNT_TIMER_SEC = 20, TIME_FOR_BONUS_W_SEC = 5, minValue = 0, maxValue = words.length;
+    private final int COUNT_TIMER_SEC = 20, TIME_FOR_BONUS_W_SEC = 5, minValue = 0, maxValue = words_short.length, maxValueBonus = words_long_bonus.length;
     int decrease = 0;
-    public static double combo = 1;
+    public double combo = 1;
 
 
     @Override
@@ -49,8 +51,8 @@ public class GameLevel extends AppCompatActivity {
         wrongW = 0;
         try {
             Thread.sleep(500);
-            displayTextView.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
-            displayBonusWord.setText(words[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+            displayTextView.setText(words_short[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
+            displayBonusWord.setText(words_long_bonus[(int) (minValue + Math.random() * (maxValueBonus - minValue + 1))]);
             animati();
             animatiBonus();
         }catch (Exception e){onBackPressed();}
@@ -109,12 +111,18 @@ public class GameLevel extends AppCompatActivity {
 
 
     private void changeDisplayedWord() {
-        displayTextView.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
+        if (maxCombo < combo){
+            maxCombo = combo;
+        }
+        displayTextView.setText(words_short[(int) (minValue + Math.random() * (maxValue - minValue + 1))]);
         animati();
         resetTimer();
     }
     private void changeDisplayedBonusWord() {
-        displayBonusWord.setText(words[(int)(minValue + Math.random() * (maxValue - minValue + 1))]);
+        if (maxCombo < combo){
+            maxCombo = combo;
+        }
+        displayBonusWord.setText(words_long_bonus[(int) (minValue + Math.random() * (maxValueBonus - minValue + 1))]);
         animatiBonus();
         resetTimerBonus();
     }
@@ -155,7 +163,7 @@ public class GameLevel extends AppCompatActivity {
             else {
                 combo = 1.0;
                 decrease = 0;
-                wrongW--;
+                wrongW++;
                 ani(comboView);
                 comboView.setText(String.format("%.1f",combo));
                 score--;
@@ -188,14 +196,12 @@ public class GameLevel extends AppCompatActivity {
     CountDownTimer countDownTimer = new CountDownTimer(COUNT_TIMER_SEC *1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            timerTextView.setText("Время: "+millisUntilFinished/1000);
+            timerTextView.setText(String.valueOf(millisUntilFinished/1000));
         }
 
         @Override
         public void onFinish() {
             try {
-                if (wrongW<0)
-                    wrongW = 0;
                 score = score * (int)combo;
                 handler.removeCallbacks(changeWordRunnable);
                 handlerBonus.removeCallbacks(changeBonusWordRunnable);

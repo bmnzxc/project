@@ -5,6 +5,7 @@ import static androidx.navigation.Navigation.findNavController;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonStart, btnStats;
     private TextView textView;
     private long backPressedTime;
-
+    static {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
     DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

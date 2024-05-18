@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ResultWindow extends AppCompatActivity {
-    private TextView result;
+    private TextView result, rightWView, wrongWView, maxComboView;
     private Button button;
     DBHelper dbHelper;
 
@@ -35,6 +35,13 @@ public class ResultWindow extends AppCompatActivity {
         result = findViewById(R.id.results);
         result.setText(String.valueOf(GameLevel.score));
         button = findViewById(R.id.tb);
+        rightWView = findViewById(R.id.right_w_view);
+        wrongWView = findViewById(R.id.wrong_w_view);
+        maxComboView = findViewById(R.id.max_combo_view);
+
+        rightWView.setText("Правильно слов: " + String.valueOf(GameLevel.rightW));
+        wrongWView.setText("Неправильно слов: " + String.valueOf(GameLevel.wrongW));
+        maxComboView.setText("Максимальное комбо:" + String.format("%.1f",GameLevel.maxCombo));
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

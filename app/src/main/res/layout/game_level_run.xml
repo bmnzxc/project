@@ -15,14 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="200dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="140dp"
         android:gravity="center"
-        android:textColor="@color/white30timer"
         android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/layout"
-        app:layout_constraintEnd_toStartOf="@+id/comboView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,12 +76,25 @@
         android:id="@+id/comboView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/plates_background_style_stats"
+        android:backgroundTint="#212F3C"
         android:textColor="@color/white100"
         android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/layout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="left"
+        android:text="Время:"
+        android:textColor="@color/white30timer"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toStartOf="@+id/timeOut"
         app:layout_constraintTop_toTopOf="parent" />
 
 
